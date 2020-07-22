@@ -65,8 +65,9 @@ def user(username):
     return render_template('user.html', posts=posts, user=user)
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
 def edit_profile():
-    form = EditProfileForm()
+    form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.about = form.about.data
