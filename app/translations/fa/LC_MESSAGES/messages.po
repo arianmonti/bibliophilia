@@ -1,0 +1,263 @@
+# Persian translations for PROJECT.
+# Copyright (C) 2020 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-08-05 13:19+0430\n"
+"PO-Revision-Date: 2020-08-03 23:03+0430\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: fa\n"
+"Language-Team: fa <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: app/__init__.py:17
+msgid "Please login to access this page"
+msgstr "لطفا برای دسترسی به این صفحه وارد شوید"
+
+#: app/forms.py:8 app/forms.py:14 app/forms.py:31
+msgid "Username"
+msgstr "نام کاربری"
+
+#: app/forms.py:9 app/forms.py:16 app/forms.py:57
+msgid "Password"
+msgstr "رمز عبور"
+
+#: app/forms.py:10
+msgid "Remember Me"
+msgstr "مرا یادت باشد"
+
+#: app/forms.py:11 app/templates/login.html:5 app/templates/origin/login.html:5
+msgid "Sign In"
+msgstr "ورود"
+
+#: app/forms.py:15 app/forms.py:53
+msgid "Email"
+msgstr "ایمیل"
+
+#: app/forms.py:17 app/forms.py:58
+msgid "Confirm Password"
+msgstr "تایید رمز عبور"
+
+#: app/forms.py:18 app/templates/origin/register.html:5
+#: app/templates/register.html:5
+msgid "Register"
+msgstr "ثبت نام"
+
+#: app/forms.py:23
+msgid "Select a different username."
+msgstr "نام کاربری دیگری را انتخاب کنید."
+
+#: app/forms.py:28
+msgid "Select a different email."
+msgstr "ایمیل دیگری را انتخاب کنید."
+
+#: app/forms.py:32
+msgid "About me"
+msgstr "درباره من"
+
+#: app/forms.py:33 app/forms.py:50
+msgid "Submit"
+msgstr "تایید"
+
+#: app/forms.py:43
+msgid "Please use a different username."
+msgstr "لطفا از نام کاربری دیگری استفاده کنید."
+
+#: app/forms.py:49
+msgid "Post"
+msgstr "پست"
+
+#: app/forms.py:54 app/forms.py:59
+msgid "Request Password Reset"
+msgstr "درخواست تغییر رمز عبور"
+
+#: app/routes.py:27
+msgid "Your post is now live!"
+msgstr "پست شما اکنون قابل مشاهده است!"
+
+#: app/routes.py:43
+msgid "Error"
+msgstr "خطا"
+
+#: app/routes.py:67
+msgid "Congratulations, you are now a registered user!"
+msgstr "تبریک, شما اکنون کاربر ثبت نام شده هستید!"
+
+#: app/routes.py:90
+msgid "Your changes have been saved."
+msgstr "تغییرات شما ذخیره شد."
+
+#: app/routes.py:104 app/routes.py:123
+#, python-format
+msgid "User %(username)s not found."
+msgstr "کاربر %(username) پیدا نشد."
+
+#: app/routes.py:107
+msgid "You can not follow yourself."
+msgstr "شما نمی توانید خودتان را دنبال کنید"
+
+#: app/routes.py:111
+#, python-format
+msgid "You are following %(username)s!"
+msgstr "شما %(username) را دنبال می کنید!"
+
+#: app/routes.py:126
+msgid "You can not unfollow yourself"
+msgstr "شما نمی توانید دنبال کردن خودتان را لغو کنید"
+
+#: app/routes.py:130
+#, python-format
+msgid "You are not following %(username)s."
+msgstr "شما %(username) را دنبال نمی کنید."
+
+#: app/routes.py:152
+msgid "Check your email for the instructions to reset your password"
+msgstr "ایمیل خود را برای دستورات تغییر رمز عبور نگاه کنید"
+
+#: app/routes.py:167
+msgid "Your password has been reset."
+msgstr "رمز عبور شما تغییر یافت."
+
+#: app/templates/404.html:5 app/templates/origin/404.html:5
+msgid "Not Found"
+msgstr "پیدا نشد"
+
+#: app/templates/404.html:6 app/templates/500.html:6
+#: app/templates/origin/404.html:6 app/templates/origin/500.html:6
+msgid "Back"
+msgstr "بازگشت"
+
+#: app/templates/500.html:4 app/templates/origin/500.html:4
+msgid "An unexpected error has occurred"
+msgstr "خطای غیر منتظره ای روی داد"
+
+#: app/templates/500.html:5 app/templates/origin/500.html:5
+msgid "The administrator has been notified. Sorry for the inconvenience!"
+msgstr "ادمین متوجه شده است. برای مشکل پیش آمده معذرت می خواهیم!"
+
+#: app/templates/_post.html:14
+#, python-format
+msgid "%(username)s said: %(when)s"
+msgstr "%(username)s گفت: %(when)s"
+
+#: app/templates/base.html:7 app/templates/origin/base.html:7
+msgid "Welcome to Bibliophilia"
+msgstr ""
+
+#: app/templates/base.html:25 app/templates/origin/base.html:25
+msgid "Home"
+msgstr "خانه"
+
+#: app/templates/base.html:26 app/templates/origin/base.html:26
+msgid "Explore"
+msgstr "جستجو"
+
+#: app/templates/base.html:30 app/templates/origin/base.html:30
+msgid "Login"
+msgstr "ورود"
+
+#: app/templates/base.html:32 app/templates/origin/base.html:32
+msgid "Profile"
+msgstr "پروفایل"
+
+#: app/templates/base.html:33 app/templates/origin/base.html:33
+msgid "Logout"
+msgstr "خروج"
+
+#: app/templates/edit_profile.html:5 app/templates/origin/edit_profile.html:5
+msgid "Edit Profile"
+msgstr "تغییر پروفایل"
+
+#: app/templates/index.html:5 app/templates/origin/index.html:5
+#, python-format
+msgid "Hi, %(username)s"
+msgstr "سلام %(username)s"
+
+#: app/templates/index.html:19 app/templates/origin/index.html:17
+#: app/templates/origin/user.html:41 app/templates/user.html:41
+msgid "Newer posts"
+msgstr "پست های جدیدتر"
+
+#: app/templates/index.html:23 app/templates/origin/index.html:22
+#: app/templates/origin/user.html:46 app/templates/user.html:46
+msgid "Older posts"
+msgstr "پست های قدیمی تر"
+
+#: app/templates/login.html:12 app/templates/origin/login.html:12
+msgid "New User?"
+msgstr "کاربر جدید؟"
+
+#: app/templates/login.html:12 app/templates/origin/login.html:12
+msgid "Click to Register!"
+msgstr "برای ثبت نام کلیک کنید!"
+
+#: app/templates/login.html:14 app/templates/origin/login.html:14
+msgid "Forgot Your Password?"
+msgstr "فراموشی رمز عبور؟"
+
+#: app/templates/login.html:15 app/templates/origin/login.html:15
+msgid "Click to Reset It"
+msgstr "برای بازیابی کلیک کنید"
+
+#: app/templates/origin/reset_password.html:5
+#: app/templates/reset_password.html:5
+msgid "Reset Your Password"
+msgstr "بازیابی رمز عبور"
+
+#: app/templates/origin/reset_password_request.html:4
+#: app/templates/reset_password_request.html:5
+msgid "Reset Password"
+msgstr "بازیابی رمز عبور"
+
+#: app/templates/origin/user.html:8 app/templates/user.html:8
+msgid "User"
+msgstr "کاربر"
+
+#: app/templates/origin/user.html:11 app/templates/user.html:11
+msgid "Last seen on"
+msgstr "آخرین بازدید در"
+
+#: app/templates/origin/user.html:13 app/templates/user.html:13
+#, python-format
+msgid "%(count)d followers"
+msgstr "%(count)d دنبال کننده"
+
+#: app/templates/origin/user.html:13 app/templates/user.html:13
+#, python-format
+msgid "%(count)d following"
+msgstr "%(count)d دنبال می کند"
+
+#: app/templates/origin/user.html:15 app/templates/user.html:15
+msgid "Edit your profile"
+msgstr "تغییر پروفایل"
+
+#: app/templates/origin/user.html:20 app/templates/user.html:20
+msgid "Follow"
+msgstr "دنبال کردن"
+
+#: app/templates/origin/user.html:27 app/templates/user.html:27
+msgid "Unfollow"
+msgstr "لغو دنبال کردن"
+
+#: app/templates/origin/_post.html:14
+#, python-format
+msgid "%(username)s said %(when)s"
+msgstr "%(username)s گفت %(when)s"
+
+#~ msgid "Hi, %(username)s!"
+#~ msgstr "سلام, %(username)!"
+
+#~ msgid "%(username)s %(when)s"
+#~ msgstr ""
+
+#~ msgid "%(username)s: %(when)s"
+#~ msgstr ""
+

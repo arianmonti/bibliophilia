@@ -4,33 +4,33 @@
     {% if title %}
         {{ title }} - Bibliophilia
     {% else %}
-        Welcome to Bibliophilia
+        {{ _('Welcome to Bibliophilia') }}
     {% endif %}
 {% endblock %}
 
 {% block navbar %}
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default custom-background" style="font-family: 'Vazir';">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url_for('index')}}">Bibliophilia</a>
+                <a class="navbar-brand" href="{{ url_for('index') }}">Bibliophilia</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('index') }}">Home</a></li>
-                    <li><a href="{{ url_for('explore') }}">Explore</a></li>
+                    <li><a href="{{ url_for('index') }}">{{ _('Home') }}</a></li>
+                    <li><a href="{{ url_for('explore') }}">{{ _('Explore') }}</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if current_user.is_anonymous %}
-                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <li><a href="{{ url_for('login') }}">{{ _('Login') }}</a></li>
                     {% else %}
-                    <li><a href="{{ url_for('user', username=current_user.username)}}">Profile</a></li>
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    <li><a href="{{ url_for('user', username=current_user.username) }}">{{ _('Profile') }}</a></li>
+                    <li><a href="{{ url_for('logout') }}">{{ _('Logout') }}</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -39,11 +39,15 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    {% if g.locale == 'fa' %}
+    <div class="container" dir="rtl" style="font-family: Vazir">
+    {% else %}
+    <div class="container" dir="ltr" style="font-family: 'Helvetica Neue', 'Helvetica', Arial, 'Vazir'">
+    {% endif %}
         {% with messages=get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
-                <div class="alert alert-info" role="alert">{{ message}}</div>
+                <div class="alert alert-info" role="alert" dir="auto">{{ message}}</div>
             {% endfor %}
         {% endif %}
         {% endwith %}
@@ -56,4 +60,5 @@
 {% block scripts %}
     {{ super() }}
     {{ moment.include_moment() }}
+    {{ moment.lang(g.locale) }}
 {% endblock %}
