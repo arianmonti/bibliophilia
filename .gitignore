@@ -129,6 +129,5 @@ dmypy.json
 .pyre/
 
 ## special files
-config.py
 microblog.log*
 logs/
