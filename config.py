@@ -16,3 +16,4 @@ class Config(object):
     ADMINS = os.environ.get('ADMINS') or ['email']
     POSTS_PER_PAGE=2
     LANGUAGES = ['en', 'fa']
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
