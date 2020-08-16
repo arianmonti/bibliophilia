@@ -9,6 +9,7 @@ from config import Config
 class TestConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
+    ELASTICSEARCH_URL = None
 
 class UserTest(unittest.TestCase):
     def setUp(self):
@@ -16,12 +17,12 @@ class UserTest(unittest.TestCase):
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
-    
+
     def tearDown(self):
         db.session.remove()
         db.drop_all()
         self.app_context.pop()
-    
+
     def test_password_check(self):
         u = User(username='susan')
         u.set_password('axolotl')

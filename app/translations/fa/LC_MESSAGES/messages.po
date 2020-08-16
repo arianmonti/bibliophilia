@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-08-13 14:01+0430\n"
+"POT-Creation-Date: 2020-08-16 14:00+0430\n"
 "PO-Revision-Date: 2020-08-03 23:03+0430\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fa\n"
@@ -18,132 +18,137 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: app/__init__.py:17
-msgid "Please login to access this page"
+#: app/__init__.py:19
+msgid "Please log in to access this page."
 msgstr "لطفا برای دسترسی به این صفحه وارد شوید"
-
-#: app/forms.py:8 app/forms.py:14 app/forms.py:31
-msgid "Username"
-msgstr "نام کاربری"
-
-#: app/forms.py:9 app/forms.py:16 app/forms.py:57
-msgid "Password"
-msgstr "رمز عبور"
-
-#: app/forms.py:10
-msgid "Remember Me"
-msgstr "مرا یادت باشد"
-
-#: app/forms.py:11 app/templates/login.html:5
-msgid "Sign In"
-msgstr "ورود"
-
-#: app/forms.py:15 app/forms.py:53
-msgid "Email"
-msgstr "ایمیل"
-
-#: app/forms.py:17 app/forms.py:58
-msgid "Confirm Password"
-msgstr "تایید رمز عبور"
-
-#: app/forms.py:18 app/templates/register.html:5
-msgid "Register"
-msgstr "ثبت نام"
-
-#: app/forms.py:23
-msgid "Select a different username."
-msgstr "نام کاربری دیگری را انتخاب کنید."
-
-#: app/forms.py:28
-msgid "Select a different email."
-msgstr "ایمیل دیگری را انتخاب کنید."
-
-#: app/forms.py:32
-msgid "About me"
-msgstr "درباره من"
-
-#: app/forms.py:33 app/forms.py:50
-msgid "Submit"
-msgstr "تایید"
-
-#: app/forms.py:43
-msgid "Please use a different username."
-msgstr "لطفا از نام کاربری دیگری استفاده کنید."
-
-#: app/forms.py:49
-msgid "Post"
-msgstr "پست"
-
-#: app/forms.py:54 app/forms.py:59
-msgid "Request Password Reset"
-msgstr "درخواست تغییر رمز عبور"
-
-#: app/routes.py:32
-msgid "Your post is now live!"
-msgstr "پست شما اکنون قابل مشاهده است!"
-
-#: app/routes.py:48
-msgid "Error"
-msgstr "خطا"
-
-#: app/routes.py:72
-msgid "Congratulations, you are now a registered user!"
-msgstr "تبریک, شما اکنون کاربر ثبت نام شده هستید!"
-
-#: app/routes.py:95
-msgid "Your changes have been saved."
-msgstr "تغییرات شما ذخیره شد."
-
-#: app/routes.py:109 app/routes.py:128
-#, python-format
-msgid "User %(username)s not found."
-msgstr "کاربر %(username) پیدا نشد."
-
-#: app/routes.py:112
-msgid "You can not follow yourself."
-msgstr "شما نمی توانید خودتان را دنبال کنید"
-
-#: app/routes.py:116
-#, python-format
-msgid "You are following %(username)s!"
-msgstr "شما %(username) را دنبال می کنید!"
-
-#: app/routes.py:131
-msgid "You can not unfollow yourself"
-msgstr "شما نمی توانید دنبال کردن خودتان را لغو کنید"
-
-#: app/routes.py:135
-#, python-format
-msgid "You are not following %(username)s."
-msgstr "شما %(username) را دنبال نمی کنید."
-
-#: app/routes.py:157
-msgid "Check your email for the instructions to reset your password"
-msgstr "ایمیل خود را برای دستورات تغییر رمز عبور نگاه کنید"
-
-#: app/routes.py:172
-msgid "Your password has been reset."
-msgstr "رمز عبور شما تغییر یافت."
 
 #: app/translate.py:9
 msgid "Error: the translation service failed."
 msgstr "خطای ترجمه"
 
-#: app/templates/404.html:5
-msgid "Not Found"
-msgstr "پیدا نشد"
+#: app/auth/forms.py:9 app/auth/forms.py:15 app/main/forms.py:9
+msgid "Username"
+msgstr "نام کاربری"
 
-#: app/templates/404.html:6 app/templates/500.html:6
-msgid "Back"
-msgstr "بازگشت"
+#: app/auth/forms.py:10 app/auth/forms.py:17 app/auth/forms.py:36
+msgid "Password"
+msgstr "رمز عبور"
 
-#: app/templates/500.html:4
-msgid "An unexpected error has occurred"
-msgstr "خطای غیر منتظره ای روی داد"
+#: app/auth/forms.py:11
+msgid "Remember Me"
+msgstr "مرا یادت باشد"
 
-#: app/templates/500.html:5
-msgid "The administrator has been notified. Sorry for the inconvenience!"
-msgstr "ادمین متوجه شده است. برای مشکل پیش آمده معذرت می خواهیم!"
+#: app/auth/forms.py:12 app/auth/routes.py:27 app/templates/auth/login.html:5
+msgid "Sign In"
+msgstr "ورود"
+
+#: app/auth/forms.py:16 app/auth/forms.py:32
+msgid "Email"
+msgstr "ایمیل"
+
+#: app/auth/forms.py:18 app/auth/forms.py:37
+msgid "Confirm Password"
+msgstr "تایید رمز عبور"
+
+#: app/auth/forms.py:19 app/auth/routes.py:48
+#: app/templates/auth/register.html:5
+msgid "Register"
+msgstr "ثبت نام"
+
+#: app/auth/forms.py:24
+msgid "Select a different username."
+msgstr "نام کاربری دیگری را انتخاب کنید."
+
+#: app/auth/forms.py:29
+msgid "Select a different email."
+msgstr "ایمیل دیگری را انتخاب کنید."
+
+#: app/auth/forms.py:33 app/auth/forms.py:38
+msgid "Request Password Reset"
+msgstr "درخواست تغییر رمز عبور"
+
+#: app/auth/routes.py:20
+msgid "Error"
+msgstr "خطا"
+
+#: app/auth/routes.py:46
+msgid "Congratulations, you are now a registered user!"
+msgstr "تبریک, شما اکنون کاربر ثبت نام شده هستید!"
+
+#: app/auth/routes.py:60
+msgid "Check your email for the instructions to reset your password"
+msgstr "ایمیل خود را برای دستورات تغییر رمز عبور نگاه کنید"
+
+#: app/auth/routes.py:62 app/templates/auth/reset_password_request.html:5
+msgid "Reset Password"
+msgstr "بازیابی رمز عبور"
+
+#: app/auth/routes.py:76
+msgid "Your password has been reset."
+msgstr "رمز عبور شما تغییر یافت."
+
+#: app/main/forms.py:10
+msgid "About me"
+msgstr "درباره من"
+
+#: app/main/forms.py:11 app/main/forms.py:28
+msgid "Submit"
+msgstr "تایید"
+
+#: app/main/forms.py:21
+msgid "Please use a different username."
+msgstr "لطفا از نام کاربری دیگری استفاده کنید."
+
+#: app/main/forms.py:27
+msgid "Post"
+msgstr "پست"
+
+#: app/main/forms.py:31 app/main/routes.py:146
+msgid "Search"
+msgstr "جستجو"
+
+#: app/main/routes.py:34
+msgid "Your post is now live!"
+msgstr "پست شما اکنون قابل مشاهده است!"
+
+#: app/main/routes.py:40 app/templates/base.html:25
+msgid "Home"
+msgstr "خانه"
+
+#: app/main/routes.py:51 app/templates/base.html:26
+msgid "Explore"
+msgstr "جستجو"
+
+#: app/main/routes.py:75
+msgid "Your changes have been saved."
+msgstr "تغییرات شما ذخیره شد."
+
+#: app/main/routes.py:80 app/templates/edit_profile.html:5
+msgid "Edit Profile"
+msgstr "تغییر پروفایل"
+
+#: app/main/routes.py:90 app/main/routes.py:110
+#, python-format
+msgid "User %(username)s not found."
+msgstr "کاربر %(username) پیدا نشد."
+
+#: app/main/routes.py:93
+msgid "You cannot follow yourself!"
+msgstr ""
+
+#: app/main/routes.py:97
+#, python-format
+msgid "You are following %(username)s!"
+msgstr "شما %(username) را دنبال می کنید!"
+
+#: app/main/routes.py:113
+msgid "You cannot unfollow yourself!"
+msgstr ""
+
+#: app/main/routes.py:117
+#, python-format
+msgid "You are not following %(username)s."
+msgstr "شما %(username) را دنبال نمی کنید."
 
 #: app/templates/_post.html:14
 #, python-format
@@ -158,33 +163,21 @@ msgstr "ترجمه"
 msgid "Welcome to Bibliophilia"
 msgstr "به بیبلیوفیلیا خوش آمدید"
 
-#: app/templates/base.html:25
-msgid "Home"
-msgstr "خانه"
-
-#: app/templates/base.html:26
-msgid "Explore"
-msgstr "جستجو"
-
-#: app/templates/base.html:30
+#: app/templates/base.html:39
 msgid "Login"
 msgstr "ورود"
 
-#: app/templates/base.html:32
+#: app/templates/base.html:41
 msgid "Profile"
 msgstr "پروفایل"
 
-#: app/templates/base.html:33
+#: app/templates/base.html:42
 msgid "Logout"
 msgstr "خروج"
 
-#: app/templates/base.html:74
+#: app/templates/base.html:83
 msgid "Error: Could not contact server."
 msgstr "خطای ارتباط با سرور"
-
-#: app/templates/edit_profile.html:5
-msgid "Edit Profile"
-msgstr "تغییر پروفایل"
 
 #: app/templates/index.html:5
 #, python-format
@@ -199,29 +192,17 @@ msgstr "پست های جدیدتر"
 msgid "Older posts"
 msgstr "پست های قدیمی تر"
 
-#: app/templates/login.html:12
-msgid "New User?"
-msgstr "کاربر جدید؟"
+#: app/templates/search.html:4
+msgid "Search Results"
+msgstr "نتایج جستجو"
 
-#: app/templates/login.html:12
-msgid "Click to Register!"
-msgstr "برای ثبت نام کلیک کنید!"
+#: app/templates/search.html:13
+msgid "Previous results"
+msgstr "نتایج قبلی"
 
-#: app/templates/login.html:14
-msgid "Forgot Your Password?"
-msgstr "فراموشی رمز عبور؟"
-
-#: app/templates/login.html:15
-msgid "Click to Reset It"
-msgstr "برای بازیابی کلیک کنید"
-
-#: app/templates/reset_password.html:5
-msgid "Reset Your Password"
-msgstr "بازیابی رمز عبور"
-
-#: app/templates/reset_password_request.html:5
-msgid "Reset Password"
-msgstr "بازیابی رمز عبور"
+#: app/templates/search.html:18
+msgid "Next results"
+msgstr "نتایج بعدی"
 
 #: app/templates/user.html:8
 msgid "User"
@@ -253,6 +234,42 @@ msgstr "دنبال کردن"
 msgid "Unfollow"
 msgstr "لغو دنبال کردن"
 
+#: app/templates/auth/login.html:12
+msgid "New User?"
+msgstr "کاربر جدید؟"
+
+#: app/templates/auth/login.html:12
+msgid "Click to Register!"
+msgstr "برای ثبت نام کلیک کنید!"
+
+#: app/templates/auth/login.html:14
+msgid "Forgot Your Password?"
+msgstr "فراموشی رمز عبور؟"
+
+#: app/templates/auth/login.html:15
+msgid "Click to Reset It"
+msgstr "برای بازیابی کلیک کنید"
+
+#: app/templates/auth/reset_password.html:5
+msgid "Reset Your Password"
+msgstr "بازیابی رمز عبور"
+
+#: app/templates/errors/404.html:5
+msgid "Not Found"
+msgstr "پیدا نشد"
+
+#: app/templates/errors/404.html:6 app/templates/errors/500.html:6
+msgid "Back"
+msgstr "بازگشت"
+
+#: app/templates/errors/500.html:4
+msgid "An unexpected error has occurred"
+msgstr "خطای غیر منتظره ای روی داد"
+
+#: app/templates/errors/500.html:5
+msgid "The administrator has been notified. Sorry for the inconvenience!"
+msgstr "ادمین متوجه شده است. برای مشکل پیش آمده معذرت می خواهیم!"
+
 #~ msgid "Hi, %(username)s!"
 #~ msgstr "سلام, %(username)!"
 
@@ -264,4 +281,13 @@ msgstr "لغو دنبال کردن"
 
 #~ msgid "%(username)s said %(when)s"
 #~ msgstr "%(username)s گفت %(when)s"
+
+#~ msgid "Please login to access this page"
+#~ msgstr "لطفا برای دسترسی به این صفحه وارد شوید"
+
+#~ msgid "You can not follow yourself."
+#~ msgstr "شما نمی توانید خودتان را دنبال کنید"
+
+#~ msgid "You can not unfollow yourself"
+#~ msgstr "شما نمی توانید دنبال کردن خودتان را لغو کنید"
 

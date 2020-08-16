@@ -4,9 +4,9 @@ from time import time
 from flask import current_app
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from app.search import add_to_index, remove_from_index, query_index
 import jwt
 from app import db, login
+from app.search import add_to_index, remove_from_index, query_index
 
 class SearchableMixin(object):
     @classmethod
@@ -17,8 +17,8 @@ class SearchableMixin(object):
         when = []
         for i in range(len(ids)):
             when.append((ids[i], i))
-        return cls.query.filter(cls.id.in_(ids)).order_by(db.case(when, value=cls.id)), total
-
+        return cls.query.filter(cls.id.in_(ids)).order_by(
+            db.case(when, value=cls.id)), total
 
     @classmethod
     def before_commit(cls, session):
