@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-08-16 14:00+0430\n"
+"POT-Creation-Date: 2020-08-22 19:58+0430\n"
 "PO-Revision-Date: 2020-08-03 23:03+0430\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fa\n"
@@ -91,7 +91,7 @@ msgstr "رمز عبور شما تغییر یافت."
 msgid "About me"
 msgstr "درباره من"
 
-#: app/main/forms.py:11 app/main/forms.py:28
+#: app/main/forms.py:11 app/main/forms.py:28 app/main/forms.py:42
 msgid "Submit"
 msgstr "تایید"
 
@@ -106,6 +106,10 @@ msgstr "پست"
 #: app/main/forms.py:31 app/main/routes.py:146
 msgid "Search"
 msgstr "جستجو"
+
+#: app/main/forms.py:41
+msgid "Message"
+msgstr "پیام‌ها"
 
 #: app/main/routes.py:34
 msgid "Your post is now live!"
@@ -150,12 +154,20 @@ msgstr ""
 msgid "You are not following %(username)s."
 msgstr "شما %(username) را دنبال نمی کنید."
 
-#: app/templates/_post.html:14
+#: app/main/routes.py:167
+msgid "Your message has been sent."
+msgstr ""
+
+#: app/main/routes.py:169
+msgid "Send Message"
+msgstr "ارسال پیام"
+
+#: app/templates/_post.html:16
 #, python-format
 msgid "%(username)s said: %(when)s"
 msgstr "%(username)s گفت: %(when)s"
 
-#: app/templates/_post.html:25
+#: app/templates/_post.html:27
 msgid "Translate"
 msgstr "ترجمه"
 
@@ -167,15 +179,19 @@ msgstr "به بیبلیوفیلیا خوش آمدید"
 msgid "Login"
 msgstr "ورود"
 
-#: app/templates/base.html:41
+#: app/templates/base.html:41 app/templates/messages.html:4
+msgid "Messages"
+msgstr "پیام ها"
+
+#: app/templates/base.html:42
 msgid "Profile"
 msgstr "پروفایل"
 
-#: app/templates/base.html:42
+#: app/templates/base.html:43
 msgid "Logout"
 msgstr "خروج"
 
-#: app/templates/base.html:83
+#: app/templates/base.html:84
 msgid "Error: Could not contact server."
 msgstr "خطای ارتباط با سرور"
 
@@ -184,13 +200,21 @@ msgstr "خطای ارتباط با سرور"
 msgid "Hi, %(username)s"
 msgstr "سلام %(username)s"
 
-#: app/templates/index.html:22 app/templates/user.html:41
+#: app/templates/index.html:22 app/templates/user.html:49
 msgid "Newer posts"
 msgstr "پست های جدیدتر"
 
-#: app/templates/index.html:26 app/templates/user.html:46
+#: app/templates/index.html:26 app/templates/user.html:54
 msgid "Older posts"
 msgstr "پست های قدیمی تر"
+
+#: app/templates/messages.html:12
+msgid "Newer messages"
+msgstr "پیام های جدید‌‌تر"
+
+#: app/templates/messages.html:17
+msgid "Older messages"
+msgstr "پیام های قدیمی‌‌تر"
 
 #: app/templates/search.html:4
 msgid "Search Results"
@@ -204,20 +228,25 @@ msgstr "نتایج قبلی"
 msgid "Next results"
 msgstr "نتایج بعدی"
 
+#: app/templates/send_message.html:5
+#, python-format
+msgid "Send Message to %(recipient)s"
+msgstr "ارسال پیام به %(recipient)s"
+
 #: app/templates/user.html:8
 msgid "User"
 msgstr "کاربر"
 
-#: app/templates/user.html:11
+#: app/templates/user.html:11 app/templates/user_popup.html:9
 msgid "Last seen on"
 msgstr "آخرین بازدید در"
 
-#: app/templates/user.html:13
+#: app/templates/user.html:13 app/templates/user_popup.html:11
 #, python-format
 msgid "%(count)d followers"
 msgstr "%(count)d دنبال کننده"
 
-#: app/templates/user.html:13
+#: app/templates/user.html:13 app/templates/user_popup.html:11
 #, python-format
 msgid "%(count)d following"
 msgstr "%(count)d دنبال می کند"
@@ -226,13 +255,17 @@ msgstr "%(count)d دنبال می کند"
 msgid "Edit your profile"
 msgstr "تغییر پروفایل"
 
-#: app/templates/user.html:20
+#: app/templates/user.html:20 app/templates/user_popup.html:17
 msgid "Follow"
 msgstr "دنبال کردن"
 
-#: app/templates/user.html:27
+#: app/templates/user.html:27 app/templates/user_popup.html:24
 msgid "Unfollow"
 msgstr "لغو دنبال کردن"
+
+#: app/templates/user.html:35
+msgid "Send private message"
+msgstr "ارسال پیام خصوصی"
 
 #: app/templates/auth/login.html:12
 msgid "New User?"

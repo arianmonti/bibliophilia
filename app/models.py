@@ -111,7 +111,7 @@ class User(db.Model, UserMixin):
     def new_messages(self):
         last_read_time = self.last_message_read_time or datetime(1900, 1, 1)
         return Message.query.filter_by(recipient=self).filter(
-            Message.timestamp > last_read_time).count()
+            Message.time > last_read_time).count()
 
     @staticmethod
     def verify_reset_password_token(token):
