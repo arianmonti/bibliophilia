@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template, flash, redirect, url_for, request, g, jsonify, current_app
+from flask import render_template, flash, redirect, url_for, request, g, jsonify, current_app, abort
 from flask_login import current_user, login_required
 from flask_babel import _, get_locale
 from guess_language import guess_language
@@ -192,3 +192,24 @@ def notifications():
         'data': n.get_data(),
         'timestamp': n.timestamp
     } for n in notifications])
+
+@bp.route('/edit_post/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_post(id):
+    form = PostForm()
+    post = Post.query.filter_by(id=id).first_or_404()
+    if current_user != post.author:
+        abort(404)
+    if form.validate_on_submit():
+        language = guess_language(form.post.data)
+        if language == 'UNKNOWN' or len(language) > 5:
+            language = ''
+        post.body = form.post.data
+        post.language = language
+        db.session.commit()
+        flash(_('Your post edited'))
+        return redirect(url_for('main.index'))
+    elif request.method == 'GET':
+        form.post.data = post.body
+    return render_template('edit_post.html', title=_('Edit Post'), form=form)
+

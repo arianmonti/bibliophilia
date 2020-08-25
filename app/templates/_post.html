@@ -14,8 +14,7 @@
 		</span>
                 {% endset %}
                 {{ _('%(username)s said: %(when)s',
-                    username=user_link, when=moment(post.time).fromNow()) }}
-                <br>
+                    username=user_link, when=moment(post.time).fromNow()) }}&nbsp;
         <span id="post{{ post.id }}" dir="rtl"><p dir="auto">{{ post.body }}</p></span>
         {% if post.language and post.language != g.locale %}
         <br><br>
@@ -26,6 +25,14 @@
                     '{{ post.language }}',
                     '{{ g.locale }}');">{{ _('Translate') }}</a>
         </span>
+        {% endif %}
+        {% if current_user.id == post.user_id %}
+            {% if g.locale != 'fa' %}
+            <div style="text-align: right;">
+            {% else %}
+            <div style="text-align: left;">
+            {% endif %}
+                <a href="{{ url_for('main.edit_post', id=post.id) }}" >{{ _('Edit') }}</a></div>
         {% endif %}
             </td>
         </tr>

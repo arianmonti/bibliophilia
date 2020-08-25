@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-08-22 19:58+0430\n"
+"POT-Creation-Date: 2020-08-25 16:00+0430\n"
 "PO-Revision-Date: 2020-08-03 23:03+0430\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fa\n"
@@ -127,7 +127,8 @@ msgstr "جستجو"
 msgid "Your changes have been saved."
 msgstr "تغییرات شما ذخیره شد."
 
-#: app/main/routes.py:80 app/templates/edit_profile.html:5
+#: app/main/routes.py:80 app/templates/edit_post.html:5
+#: app/templates/edit_profile.html:5
 msgid "Edit Profile"
 msgstr "تغییر پروفایل"
 
@@ -154,22 +155,34 @@ msgstr ""
 msgid "You are not following %(username)s."
 msgstr "شما %(username) را دنبال نمی کنید."
 
-#: app/main/routes.py:167
+#: app/main/routes.py:168
 msgid "Your message has been sent."
-msgstr ""
+msgstr "پیام شما فرستاده شد."
 
-#: app/main/routes.py:169
+#: app/main/routes.py:170
 msgid "Send Message"
 msgstr "ارسال پیام"
+
+#: app/main/routes.py:210
+msgid "Your post edited"
+msgstr "پست شما ادیت شد"
+
+#: app/main/routes.py:214
+msgid "Edit Post"
+msgstr "ادیت پست"
 
 #: app/templates/_post.html:16
 #, python-format
 msgid "%(username)s said: %(when)s"
 msgstr "%(username)s گفت: %(when)s"
 
-#: app/templates/_post.html:27
+#: app/templates/_post.html:26
 msgid "Translate"
 msgstr "ترجمه"
+
+#: app/templates/_post.html:35
+msgid "Edit"
+msgstr "ادیت"
 
 #: app/templates/base.html:7
 msgid "Welcome to Bibliophilia"
@@ -179,19 +192,19 @@ msgstr "به بیبلیوفیلیا خوش آمدید"
 msgid "Login"
 msgstr "ورود"
 
-#: app/templates/base.html:41 app/templates/messages.html:4
+#: app/templates/base.html:43 app/templates/messages.html:4
 msgid "Messages"
 msgstr "پیام ها"
 
-#: app/templates/base.html:42
+#: app/templates/base.html:52
 msgid "Profile"
 msgstr "پروفایل"
 
-#: app/templates/base.html:43
+#: app/templates/base.html:53
 msgid "Logout"
 msgstr "خروج"
 
-#: app/templates/base.html:84
+#: app/templates/base.html:94
 msgid "Error: Could not contact server."
 msgstr "خطای ارتباط با سرور"
 
