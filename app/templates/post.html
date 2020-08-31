@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block app_content %}
+{% for post in posts %}
+{% include '_post.html' %}
+{% endfor %}
+<h4>{{ _('Comments') }}</h4>
+    <form action="" method="post">
+    {{ form.hidden_tag() }}
+    {{ wtf.form_errors(form) }}
+    {{ wtf.form_field(form.body, class="form-control", dir="auto" ) }}
+    {{ wtf.form_field(form.submit) }}
+    </form>
+    <br>
+    {% for comment in comments %}
+        {% include '_comments.html' %}
+    {% endfor %}
+    <nav aria-label="..." dir="ltr">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true"></span> {{ _('Newer posts') }}
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}"> {{ _('Older posts') }} <span aria-hidden="true"></span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}

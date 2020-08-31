@@ -5,7 +5,7 @@
     {% for post in messages %}
         {% include '_post.html' %}
     {% endfor %}
-    <nav aria-label="...">
+    <nav aria-label="..." dir="ltr">
         <ul class="pager">
             <li class="previous{% if not prev_url %} disabled{% endif %}">
                 <a href="{{ prev_url or '#' }}">

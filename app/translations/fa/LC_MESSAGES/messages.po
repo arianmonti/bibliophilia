@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-08-25 16:00+0430\n"
+"POT-Creation-Date: 2020-08-31 21:26+0430\n"
 "PO-Revision-Date: 2020-08-03 23:03+0430\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fa\n"
@@ -99,7 +99,7 @@ msgstr "تایید"
 msgid "Please use a different username."
 msgstr "لطفا از نام کاربری دیگری استفاده کنید."
 
-#: app/main/forms.py:27
+#: app/main/forms.py:27 app/main/routes.py:233
 msgid "Post"
 msgstr "پست"
 
@@ -127,8 +127,7 @@ msgstr "جستجو"
 msgid "Your changes have been saved."
 msgstr "تغییرات شما ذخیره شد."
 
-#: app/main/routes.py:80 app/templates/edit_post.html:5
-#: app/templates/edit_profile.html:5
+#: app/main/routes.py:80 app/templates/edit_profile.html:5
 msgid "Edit Profile"
 msgstr "تغییر پروفایل"
 
@@ -167,20 +166,28 @@ msgstr "ارسال پیام"
 msgid "Your post edited"
 msgstr "پست شما ادیت شد"
 
-#: app/main/routes.py:214
+#: app/main/routes.py:214 app/templates/edit_post.html:5
 msgid "Edit Post"
 msgstr "ادیت پست"
 
-#: app/templates/_post.html:16
+#: app/main/routes.py:249
+msgid "Your comment edited"
+msgstr "کامنت شما ادیت شد"
+
+#: app/main/routes.py:253 app/templates/edit_comment.html:5
+msgid "Edit Comment"
+msgstr "ادیت کامنت"
+
+#: app/templates/_comments.html:16 app/templates/_post.html:16
 #, python-format
 msgid "%(username)s said: %(when)s"
 msgstr "%(username)s گفت: %(when)s"
 
-#: app/templates/_post.html:26
+#: app/templates/_comments.html:26 app/templates/_post.html:26
 msgid "Translate"
 msgstr "ترجمه"
 
-#: app/templates/_post.html:35
+#: app/templates/_comments.html:35 app/templates/_post.html:35
 msgid "Edit"
 msgstr "ادیت"
 
@@ -213,11 +220,13 @@ msgstr "خطای ارتباط با سرور"
 msgid "Hi, %(username)s"
 msgstr "سلام %(username)s"
 
-#: app/templates/index.html:22 app/templates/user.html:49
+#: app/templates/index.html:22 app/templates/post.html:24
+#: app/templates/user.html:49
 msgid "Newer posts"
 msgstr "پست های جدیدتر"
 
-#: app/templates/index.html:26 app/templates/user.html:54
+#: app/templates/index.html:26 app/templates/post.html:28
+#: app/templates/user.html:54
 msgid "Older posts"
 msgstr "پست های قدیمی تر"
 
@@ -228,6 +237,10 @@ msgstr "پیام های جدید‌‌تر"
 #: app/templates/messages.html:17
 msgid "Older messages"
 msgstr "پیام های قدیمی‌‌تر"
+
+#: app/templates/post.html:9
+msgid "Comments"
+msgstr "نظرات"
 
 #: app/templates/search.html:4
 msgid "Search Results"

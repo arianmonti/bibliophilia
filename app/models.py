@@ -99,6 +99,7 @@ class User(PaginatedAPIMixin, db.Model, UserMixin):
     notifications = db.relationship('Notification', backref='user', lazy='dynamic')
     token = db.Column(db.String(32), index=True, unique=True)
     token_expiration = db.Column(db.DateTime)
+    comments = db.relationship('Comment', backref='author', lazy='dynamic')
 
     def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
@@ -216,6 +217,7 @@ class Post(SearchableMixin, db.Model):
     time = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     language = db.Column(db.String(5))
+    comments = db.relationship('Comment', backref='post', lazy='dynamic')
 
     def __repr__(self):
         return '<Post %s>' % self.body
@@ -239,3 +241,14 @@ class Notification(db.Model):
 
     def get_data(self):
         return json.loads(str(self.payload_json))
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(400))
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    time = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
+    language = db.Column(db.String(5))
+
+    def __repr__(self):
+        return 'Comment %s' %(self.body)
