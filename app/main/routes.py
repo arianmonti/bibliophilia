@@ -228,9 +228,10 @@ def post(id):
         return redirect(url_for('main.post', id=post.id, page=1))
     page = request.args.get('page', 1, type=int)
     comments = post.comments.order_by(Comment.time.desc()).paginate(page, current_app.config['POSTS_PER_PAGE'], False)
+    comments_count = post.comments.count()
     next_url = url_for('main.post', id=post.id, page=comments.next_num) if comments.has_next else None
     prev_url = url_for('main.post', id=post.id, page=comments.prev_num) if comments.has_prev else None
-    return render_template('post.html', title=_('Post'), posts=[post], form=form, comments=comments.items, prev_url=prev_url, next_url=next_url)
+    return render_template('post.html', title=_('Post'), comments_count=comments_count, posts=[post], form=form, comments=comments.items, prev_url=prev_url, next_url=next_url)
 
 @bp.route('/edit_comment/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -251,3 +252,23 @@ def edit_comment(id):
     elif request.method == 'GET':
         form.body.data = comment.body
     return render_template('edit_comment.html', title=_('Edit Comment'), form=form)
+
+@bp.route('/comment/<int:id>', methods=['GET', 'POST'])
+def comment(id):
+    comment = Comment.query.get_or_404(id)
+    form = CommentForm()
+    if form.validate_on_submit():
+        language = guess_language(form.body.data)
+        if language == 'UNKNOWN' or len(language) > 5:
+            language = ''
+        comment_reply = Comment(body=form.body.data, parent=comment, author=current_user._get_current_object(), language=language)
+        db.session.add(comment_reply)
+        db.session.commit()
+        flash('Your comment has been published.')
+        return redirect(url_for('main.comment', id=comment.id, page=1))
+    page = request.args.get('page', 1, type=int)
+    comments = Comment.query.filter_by(id=comment.id).first().replies.paginate(page, current_app.config['POSTS_PER_PAGE'], False)
+    comments_count = Comment.query.filter_by(id=comment.id).first().replies.count()
+    next_url = url_for('main.comment', id=comment.id, page=comments.next_num) if comments.has_next else None
+    prev_url = url_for('main.comment', id=comment.id, page=comments.prev_num) if comments.has_prev else None
+    return render_template('comment.html', title=_('comment'), comments_count=comments_count, comment=[comment], form=form, comments=comments.items, prev_url=prev_url, next_url=next_url)

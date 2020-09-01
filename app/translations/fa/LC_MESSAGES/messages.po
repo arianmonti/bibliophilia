@@ -143,7 +143,7 @@ msgstr ""
 #: app/main/routes.py:97
 #, python-format
 msgid "You are following %(username)s!"
-msgstr "شما %(username) را دنبال می کنید!"
+msgstr "شما %(username)s را دنبال می کنید!"
 
 #: app/main/routes.py:113
 msgid "You cannot unfollow yourself!"
@@ -152,7 +152,8 @@ msgstr ""
 #: app/main/routes.py:117
 #, python-format
 msgid "You are not following %(username)s."
-msgstr "شما %(username) را دنبال نمی کنید."
+msgstr "شما %(username)s
+ را دنبال نمی کنید."
 
 #: app/main/routes.py:168
 msgid "Your message has been sent."

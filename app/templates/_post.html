@@ -32,7 +32,8 @@
             {% else %}
             <div style="text-align: left;">
             {% endif %}
-                <a href="{{ url_for('main.edit_post', id=post.id) }}" >{{ _('Edit') }}</a></div>
+                <a href="{{ url_for('main.edit_post', id=post.id) }}" ><i class="far fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{{ url_for('main.post', id=post.id) }}" ><i class="far fa-comment"></i>&nbsp;{{ comments_count }}</a></div>
         {% endif %}
             </td>
         </tr>

@@ -243,12 +243,27 @@ class Notification(db.Model):
         return json.loads(str(self.payload_json))
 
 class Comment(db.Model):
+    _N = 9
+
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(400))
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
     time = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
     language = db.Column(db.String(5))
+    path = db.Column(db.Text, index=True)
+    parent_id = db.Column(db.Integer, db.ForeignKey('comment.id'))
+    replies = db.relationship('Comment', backref=db.backref('parent', remote_side=[id]), lazy='dynamic')
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        prefix = self.parent.path + '.' if self.parent else ''
+        self.path = prefix + '{:0{}d}'.format(self.id, self._N)
+        db.session.commit()
+
+    def level(self):
+        return len(self.path)
 
     def __repr__(self):
         return 'Comment %s' %(self.body)

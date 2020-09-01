@@ -1,4 +1,8 @@
-<table class="table">
+{% if g.locale == 'fa' %}
+<table class="table" style="font-family: Vazir">
+{% else %}
+<table class="table" style="font-family: 'Helvetica Neue', 'Helvetica', Arial, 'Vazir'">
+{% endif %}
     <tr>
         <td width="64" style="border: 0px;"><img src="{{ user.avatar(64) }}"></td>
         <td style="border: 0px;">
