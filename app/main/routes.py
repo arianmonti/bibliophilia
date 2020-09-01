@@ -262,8 +262,7 @@ def comment(id):
         if language == 'UNKNOWN' or len(language) > 5:
             language = ''
         comment_reply = Comment(body=form.body.data, parent=comment, author=current_user._get_current_object(), language=language)
-        db.session.add(comment_reply)
-        db.session.commit()
+        comment_reply.save()
         flash('Your comment has been published.')
         return redirect(url_for('main.comment', id=comment.id, page=1))
     page = request.args.get('page', 1, type=int)
