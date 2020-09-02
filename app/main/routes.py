@@ -213,6 +213,7 @@ def edit_post(id):
         form.post.data = post.body
     return render_template('edit_post.html', title=_('Edit Post'), form=form)
 
+
 @bp.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
     post = Post.query.get_or_404(id)
@@ -222,8 +223,7 @@ def post(id):
         if language == 'UNKNOWN' or len(language) > 5:
             language = ''
         comment = Comment(body=form.body.data, post=post, author=current_user._get_current_object(), language=language)
-        db.session.add(comment)
-        db.session.commit()
+        comment.save()
         flash('Your comment has been published.')
         return redirect(url_for('main.post', id=post.id, page=1))
     page = request.args.get('page', 1, type=int)
@@ -232,6 +232,7 @@ def post(id):
     next_url = url_for('main.post', id=post.id, page=comments.next_num) if comments.has_next else None
     prev_url = url_for('main.post', id=post.id, page=comments.prev_num) if comments.has_prev else None
     return render_template('post.html', title=_('Post'), comments_count=comments_count, posts=[post], form=form, comments=comments.items, prev_url=prev_url, next_url=next_url)
+
 
 @bp.route('/edit_comment/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -253,9 +254,11 @@ def edit_comment(id):
         form.body.data = comment.body
     return render_template('edit_comment.html', title=_('Edit Comment'), form=form)
 
+
 @bp.route('/comment/<int:id>', methods=['GET', 'POST'])
 def comment(id):
     comment = Comment.query.get_or_404(id)
+    parents = comment.get_parents(comment)
     form = CommentForm()
     if form.validate_on_submit():
         language = guess_language(form.body.data)
@@ -270,4 +273,4 @@ def comment(id):
     comments_count = Comment.query.filter_by(id=comment.id).first().replies.count()
     next_url = url_for('main.comment', id=comment.id, page=comments.next_num) if comments.has_next else None
     prev_url = url_for('main.comment', id=comment.id, page=comments.prev_num) if comments.has_prev else None
-    return render_template('comment.html', title=_('comment'), comments_count=comments_count, comment=[comment], form=form, comments=comments.items, prev_url=prev_url, next_url=next_url)
+    return render_template('comment.html', title=_('comment'), parents=parents, comments_count=comments_count, comment=[comment], form=form, comments=comments.items, prev_url=prev_url, next_url=next_url)

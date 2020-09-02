@@ -265,5 +265,19 @@ class Comment(db.Model):
     def level(self):
         return len(self.path) // self._N - 1
 
+    def get_parents(self, comment):
+        parents = []
+        for _ in iter(int, 1):
+            parents.append(comment)
+            if comment.parent:
+                comment = comment.parent
+            else:
+                comment = Post.query.get(comment.post_id)
+                parents.append(comment)
+                comment = comment
+                break
+            comment = comment
+        return list(reversed(parents))
+
     def __repr__(self):
         return 'Comment %s' %(self.body)
