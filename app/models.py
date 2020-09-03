@@ -272,8 +272,8 @@ class Comment(db.Model):
             if comment.parent:
                 comment = comment.parent
             else:
-                comment = Post.query.get(comment.post_id)
-                parents.append(comment)
+                #comment = Post.query.get(comment.post_id)
+                #parents.append(comment)
                 comment = comment
                 break
             comment = comment

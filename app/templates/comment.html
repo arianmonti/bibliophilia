@@ -3,6 +3,9 @@
 
 
 {% block app_content %}
+{% for post in parent_post %}
+{% include '_post.html' %}
+{% endfor %}
 {% for comment in parents %}
 {% include '_comments.html' %}
 {% endfor %}

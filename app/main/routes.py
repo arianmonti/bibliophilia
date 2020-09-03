@@ -259,6 +259,7 @@ def edit_comment(id):
 def comment(id):
     comment = Comment.query.get_or_404(id)
     parents = comment.get_parents(comment)
+    parent_post = Post.query.filter_by(id=parents[0].post_id)
     form = CommentForm()
     if form.validate_on_submit():
         language = guess_language(form.body.data)
@@ -273,4 +274,4 @@ def comment(id):
     comments_count = Comment.query.filter_by(id=comment.id).first().replies.count()
     next_url = url_for('main.comment', id=comment.id, page=comments.next_num) if comments.has_next else None
     prev_url = url_for('main.comment', id=comment.id, page=comments.prev_num) if comments.has_prev else None
-    return render_template('comment.html', title=_('comment'), parents=parents, comments_count=comments_count, comment=[comment], form=form, comments=comments.items, prev_url=prev_url, next_url=next_url)
+    return render_template('comment.html', title=_('comment'), parent_post=parent_post, parents=parents, comments_count=comments_count, comment=[comment], form=form, comments=comments.items, prev_url=prev_url, next_url=next_url)

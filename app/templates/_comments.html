@@ -1,8 +1,4 @@
-{% if comment.__class__.__name__ == 'Comment' %}
 <a style="color: black; text-decoration: none;" href="{{ url_for('main.comment', id=comment.id) }}">
-{% else %}
-<a style="color: black; text-decoration: none;" href="{{ url_for('main.post', id=comment.id) }}">
-{% endif %}
     <table class="table table-hover">
     <tr>
         <td width="70px">
@@ -18,8 +14,15 @@
                 </a>
     </span>
             {% endset %}
-            {{ _('%(username)s said: %(when)s',
-                username=user_link, when=moment(comment.time).fromNow()) }}&nbsp;
+            {% set user_reply_to_link %}
+    <span class="user_popup">
+                <a href="{{ url_for('main.user', username=comment.parent.author.username if comment.parent else comment.post.author.username)}}">
+                    {{ comment.parent.author.username if comment.parent else comment.post.author.username }}
+                </a>
+    </span>
+            {% endset %}
+            {{ _('%(username)s replying to %(reply_to)s: %(when)s',
+                username=user_link, reply_to=user_reply_to_link, when=moment(comment.time).fromNow()) }}&nbsp;
     <span id="comment{{ comment.id }}" dir="rtl"><p dir="auto">{{ comment.body }}</p></span>
     {% if comment.language and comment.language != g.locale %}
     <br><br>
