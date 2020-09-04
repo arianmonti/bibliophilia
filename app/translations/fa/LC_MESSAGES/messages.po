@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-08-31 21:26+0430\n"
+"POT-Creation-Date: 2020-09-04 22:35+0430\n"
 "PO-Revision-Date: 2020-08-03 23:03+0430\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fa\n"
@@ -92,6 +92,7 @@ msgid "About me"
 msgstr "درباره من"
 
 #: app/main/forms.py:11 app/main/forms.py:28 app/main/forms.py:42
+#: app/main/forms.py:46
 msgid "Submit"
 msgstr "تایید"
 
@@ -99,7 +100,7 @@ msgstr "تایید"
 msgid "Please use a different username."
 msgstr "لطفا از نام کاربری دیگری استفاده کنید."
 
-#: app/main/forms.py:27 app/main/routes.py:233
+#: app/main/forms.py:27 app/main/routes.py:234
 msgid "Post"
 msgstr "پست"
 
@@ -152,8 +153,7 @@ msgstr ""
 #: app/main/routes.py:117
 #, python-format
 msgid "You are not following %(username)s."
-msgstr "شما %(username)s
- را دنبال نمی کنید."
+msgstr "شما %(username)"
 
 #: app/main/routes.py:168
 msgid "Your message has been sent."
@@ -171,26 +171,31 @@ msgstr "پست شما ادیت شد"
 msgid "Edit Post"
 msgstr "ادیت پست"
 
-#: app/main/routes.py:249
+#: app/main/routes.py:251
 msgid "Your comment edited"
 msgstr "کامنت شما ادیت شد"
 
-#: app/main/routes.py:253 app/templates/edit_comment.html:5
+#: app/main/routes.py:255 app/templates/edit_comment.html:5
 msgid "Edit Comment"
 msgstr "ادیت کامنت"
 
-#: app/templates/_comments.html:16 app/templates/_post.html:16
-#, python-format
-msgid "%(username)s said: %(when)s"
-msgstr "%(username)s گفت: %(when)s"
+#: app/main/routes.py:277
+msgid "comment"
+msgstr "کامنت"
 
-#: app/templates/_comments.html:26 app/templates/_post.html:26
+#: app/templates/_comments.html:24
+#, python-format
+msgid "%(username)s replying to %(reply_to)s: %(when)s"
+msgstr "%(username)s در جواب %(reply_to)s: %(when)s"
+
+#: app/templates/_comments.html:34 app/templates/_post.html:26
 msgid "Translate"
 msgstr "ترجمه"
 
-#: app/templates/_comments.html:35 app/templates/_post.html:35
-msgid "Edit"
-msgstr "ادیت"
+#: app/templates/_post.html:16
+#, python-format
+msgid "%(username)s said: %(when)s"
+msgstr "%(username)s گفت: %(when)s"
 
 #: app/templates/base.html:7
 msgid "Welcome to Bibliophilia"
@@ -216,20 +221,24 @@ msgstr "خروج"
 msgid "Error: Could not contact server."
 msgstr "خطای ارتباط با سرور"
 
+#: app/templates/comment.html:12 app/templates/post.html:9
+msgid "Comments"
+msgstr "نظرات"
+
+#: app/templates/comment.html:27 app/templates/index.html:23
+#: app/templates/post.html:24 app/templates/user.html:49
+msgid "Newer posts"
+msgstr "پست های جدیدتر"
+
+#: app/templates/comment.html:31 app/templates/index.html:27
+#: app/templates/post.html:28 app/templates/user.html:54
+msgid "Older posts"
+msgstr "پست های قدیمی تر"
+
 #: app/templates/index.html:5
 #, python-format
 msgid "Hi, %(username)s"
 msgstr "سلام %(username)s"
-
-#: app/templates/index.html:22 app/templates/post.html:24
-#: app/templates/user.html:49
-msgid "Newer posts"
-msgstr "پست های جدیدتر"
-
-#: app/templates/index.html:26 app/templates/post.html:28
-#: app/templates/user.html:54
-msgid "Older posts"
-msgstr "پست های قدیمی تر"
 
 #: app/templates/messages.html:12
 msgid "Newer messages"
@@ -239,19 +248,15 @@ msgstr "پیام های جدید‌‌تر"
 msgid "Older messages"
 msgstr "پیام های قدیمی‌‌تر"
 
-#: app/templates/post.html:9
-msgid "Comments"
-msgstr "نظرات"
-
 #: app/templates/search.html:4
 msgid "Search Results"
 msgstr "نتایج جستجو"
 
-#: app/templates/search.html:13
+#: app/templates/search.html:14
 msgid "Previous results"
 msgstr "نتایج قبلی"
 
-#: app/templates/search.html:18
+#: app/templates/search.html:19
 msgid "Next results"
 msgstr "نتایج بعدی"
 
@@ -264,16 +269,16 @@ msgstr "ارسال پیام به %(recipient)s"
 msgid "User"
 msgstr "کاربر"
 
-#: app/templates/user.html:11 app/templates/user_popup.html:9
+#: app/templates/user.html:11 app/templates/user_popup.html:13
 msgid "Last seen on"
 msgstr "آخرین بازدید در"
 
-#: app/templates/user.html:13 app/templates/user_popup.html:11
+#: app/templates/user.html:13 app/templates/user_popup.html:15
 #, python-format
 msgid "%(count)d followers"
 msgstr "%(count)d دنبال کننده"
 
-#: app/templates/user.html:13 app/templates/user_popup.html:11
+#: app/templates/user.html:13 app/templates/user_popup.html:15
 #, python-format
 msgid "%(count)d following"
 msgstr "%(count)d دنبال می کند"
@@ -282,11 +287,11 @@ msgstr "%(count)d دنبال می کند"
 msgid "Edit your profile"
 msgstr "تغییر پروفایل"
 
-#: app/templates/user.html:20 app/templates/user_popup.html:17
+#: app/templates/user.html:20 app/templates/user_popup.html:21
 msgid "Follow"
 msgstr "دنبال کردن"
 
-#: app/templates/user.html:27 app/templates/user_popup.html:24
+#: app/templates/user.html:27 app/templates/user_popup.html:28
 msgid "Unfollow"
 msgstr "لغو دنبال کردن"
 
@@ -350,4 +355,7 @@ msgstr "ادمین متوجه شده است. برای مشکل پیش آمده �
 
 #~ msgid "You can not unfollow yourself"
 #~ msgstr "شما نمی توانید دنبال کردن خودتان را لغو کنید"
+
+#~ msgid "Edit"
+#~ msgstr "ادیت"
 
