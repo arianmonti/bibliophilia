@@ -1,0 +1,47 @@
+    <a style="color: black; text-decoration: none; cursor: auto; user-select: text;  " draggable="false" href="{{ url_for('main.book', id=book.id) }}"><table class="table table-hover">
+        <tr>
+            <td width="70px">
+                <!--<a href="{{ url_for('main.user', username=book.poster.username) }}">
+                    <img src="{{ book.poster.avatar(70) }}" />
+                </a>-->
+                {% if isfile('app/static/book_covers/%s' %(book.id)) %}
+                    <img height="200px" width="150px" src="{{'/static/book_covers/%s' %(book.id)}}" />
+                {% else %}
+                    <img height="200px" width="150px" src="/static/book-sample.png" />
+                {% endif %}
+            </td>
+            <td>
+                {% set user_link %}
+		<span class="user_popup">
+                    <a href="{{ url_for('main.user', username=book.poster.username) }}">
+                        {{ book.poster.username }}
+                    </a>
+		</span>
+                {% endset %}
+                <h2 style="width:75%;margin:1px 0px">{{ book.title }}</h2>
+                <h4>{{ _('by %(author)s', author=book.author) }}</h4><br><br>
+                <!--{{ _('%(username)s said: %(when)s',
+                    username=user_link, when=moment(book.time).fromNow()) }}&nbsp; -->
+                    <span id="book{{ book.id }}" dir="rtl"><p dir="auto">{{ book.description }}</p></span><br><br><br>
+        {% if book.language and book.description and book.language != g.locale %}
+        <br><br>
+        <span id="translation{{ book.id }}">
+        <a href="javascript:translate(
+                    '#book{{ book.id }}',
+                    '#translation{{ book.id }}',
+                    '{{ book.language }}',
+                    '{{ g.locale }}');">{{ _('Translate') }}</a>
+        </span>
+        {% endif %}
+        {% if current_user.id == book.user_id %}
+            {% if g.locale != 'fa' %}
+            <div style="text-align: right;">
+            {% else %}
+            <div style="text-align: left;">
+            {% endif %}
+            <a href="{{ url_for('main.edit_book', id=book.id) }}" ><i class="far fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {% endif %}
+            <a href="{{ url_for('main.book', id=book.id) }}" ><i class="far fa-comment"></i>&nbsp;{{ book.comments.count() }}</a></div>
+            </td>
+        </tr>
+    </table></a>

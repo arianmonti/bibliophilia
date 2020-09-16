@@ -2,29 +2,32 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <h1>{{ _('Hi, %(username)s', username=current_user.username) }}</h1>
+<a href="{{ url_for('main.new_book') }}"><h2>{{ _('New') }}</h2></a><br>
     {% if form %}
     <form action="" method="post">
     {{ form.hidden_tag() }}
     {{ wtf.form_errors(form) }}
-    {{ wtf.form_field(form.post, class="form-control", dir="auto" ) }}
+    {{ wtf.form_field(form.title, class="form-control", dir="auto" ) }}
+    {{ wtf.form_field(form.isbn, class="form-control", dir="auto" ) }}
+    {{ wtf.form_field(form.author, class="form-control", dir="auto" ) }}
+    {{ wtf.form_field(form.description, class="form-control", dir="auto" ) }}
     {{ wtf.form_field(form.submit) }}
     </form>
     <br>
     {% endif %}
-    {% for post in posts %}
-    {% set comments_count = post.comments.count() %}
-        {% include '_post.html' %}
+    {% for book in books %}
+    {% set comments_count = book.comments.count() %}
+        {% include '_book.html' %}
     {% endfor %}
     <nav aria-label="..." dir="ltr">
         <ul class="pager">
             <li class="previous{% if not prev_url %} disabled{% endif %}">
                 <a href="{{ prev_url or '#' }}">
-                    <span aria-hidden="true"></span> {{ _('Newer posts') }}
+                    <span aria-hidden="true"></span> {{ _('Newer books') }}
                 </a>
             </li>
             <li class="next{% if not next_url %} disabled{% endif %}">
-                <a href="{{ next_url or '#' }}"> {{ _('Older posts') }} <span aria-hidden="true"></span>
+                <a href="{{ next_url or '#' }}"> {{ _('Older books') }} <span aria-hidden="true"></span>
                 </a>
             </li>
         </ul>

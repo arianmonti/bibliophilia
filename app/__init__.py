@@ -45,6 +45,7 @@ def create_app(config_class=Config):
     app.register_blueprint(main_bp)
 
     app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) if app.config['ELASTICSEARCH_URL'] else None
+    app.jinja_env.globals.update(isfile=os.path.isfile)
 
     from app.api import bp as api_bp
     app.register_blueprint(api_bp, url_prefix='/api')

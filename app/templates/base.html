@@ -9,7 +9,9 @@
 {% endblock %}
 
 {% block navbar %}
-    <nav class="navbar navbar-default custom-background" style="font-family: 'Vazir';">
+<body style="background-color: rgba(244, 241, 234,0.5);">
+    <!-- background-color: -->
+    <nav class="navbar navbar-default" style="font-family: 'Vazir'; background: #f4f1ea;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -60,9 +62,10 @@
 
 {% block content %}
     {% if g.locale == 'fa' %}
-    <div class="container" dir="rtl" style="font-family: Vazir">
+    <div class="container" dir="rtl" style="font-family: 'Baskerville', 'Vazir'">
     {% else %}
-    <div class="container" dir="ltr" style="font-family: 'Helvetica Neue', 'Helvetica', Arial, 'Vazir'">
+    <!--<div class="container" dir="ltr" style="font-family: 'Helvetica Neue', 'Helvetica', Arial, 'Vazir'">-->
+    <div class="container" dir="ltr" style="font-family: 'Baskerville', 'Vazir'">
     {% endif %}
         {% with messages=get_flashed_messages() %}
         {% if messages %}
@@ -157,5 +160,9 @@
         });
         {% endif %}
     </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://s.gr-assets.com/assets/application-c529f9fb2f17f f0d0cbb83f99171f460.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 {% endblock %}

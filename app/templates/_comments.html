@@ -16,8 +16,8 @@
             {% endset %}
             {% set user_reply_to_link %}
     <span class="user_popup">
-                <a href="{{ url_for('main.user', username=comment.parent.author.username if comment.parent else comment.post.author.username)}}">
-                    {{ comment.parent.author.username if comment.parent else comment.post.author.username }}
+                <a href="{{ url_for('main.user', username=comment.parent.author.username) if comment.parent else url_for('main.book', id=comment.book.id)}}">
+                    {{ comment.parent.author.username if comment.parent else comment.book.title }}
                 </a>
     </span>
             {% endset %}

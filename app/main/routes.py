@@ -4,10 +4,12 @@ from flask_login import current_user, login_required
 from flask_babel import _, get_locale
 from guess_language import guess_language
 from app import db
-from app.main.forms import EditProfileForm, EmptyForm, PostForm, SearchForm, MessageForm, CommentForm
-from app.models import User, Post, Message, Notification, Comment
+from app.main.forms import EditProfileForm, EmptyForm, BookForm, SearchForm, MessageForm, CommentForm
+from app.models import User, Book, Message, Notification, Comment
 from app.translate import translate
 from app.main import bp
+from werkzeug.utils import secure_filename
+import os
 
 
 @bp.before_app_request
@@ -23,32 +25,22 @@ def before_request():
 @bp.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    form = PostForm()
-    if form.validate_on_submit():
-        language = guess_language(form.post.data)
-        if language == 'UNKNOWN' or len(language) > 5:
-            language = ''
-        post = Post(body=form.post.data, author=current_user, language=language)
-        db.session.add(post)
-        db.session.commit()
-        flash(_('Your post is now live!'))
-        return redirect(url_for('main.index'))
     page = request.args.get('page', 1, type=int)
-    posts = current_user.followed_posts().paginate(page, current_app.config['POSTS_PER_PAGE'], False)
-    next_url = url_for('main.index', page=posts.next_num) if posts.has_next else None
-    prev_url = url_for('main.index', page=posts.prev_num) if posts.has_prev else None
-    return render_template('index.html', title=_('Home'), form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+    books = current_user.followed_books().paginate(page, current_app.config['POSTS_PER_PAGE'], False)
+    next_url = url_for('main.index', page=books.next_num) if books.has_next else None
+    prev_url = url_for('main.index', page=books.prev_num) if books.has_prev else None
+    return render_template('index.html', title=_('Home'), books=books.items, next_url=next_url, prev_url=prev_url)
 
 
 @bp.route('/explore')
 @login_required
 def explore():
     page = request.args.get('page', 1, type=int)
-    posts = Post.query.order_by(Post.time.desc()).paginate(
+    books = Book.query.order_by(Book.time.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False)
-    next_url = url_for('main.explore', page=posts.next_num) if posts.has_next else None
-    prev_url = url_for('main.explore', page=posts.prev_num) if posts.has_prev else None
-    return render_template('index.html', title=_('Explore'), posts=posts.items, next_url=next_url, prev_url=prev_url)
+    next_url = url_for('main.explore', page=books.next_num) if books.has_next else None
+    prev_url = url_for('main.explore', page=books.prev_num) if books.has_prev else None
+    return render_template('index.html', title=_('Explore'), books=books.items, next_url=next_url, prev_url=prev_url)
 
 
 @bp.route('/user/<username>')
@@ -56,12 +48,12 @@ def explore():
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     page = request.args.get('page', 1, type=int)
-    posts = user.posts.order_by(Post.time.desc()).paginate(
+    books = user.books.order_by(Book.time.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False)
-    next_url = url_for('main.user', username=user.username, page=posts.next_num) if posts.has_next else None
-    prev_url = url_for('main.user', username=user.username, page=posts.prev_num) if posts.has_prev else None
+    next_url = url_for('main.user', username=user.username, page=books.next_num) if books.has_next else None
+    prev_url = url_for('main.user', username=user.username, page=books.prev_num) if books.has_prev else None
     form = EmptyForm()
-    return render_template('user.html', user=user, posts=posts.items, next_url=next_url, prev_url=prev_url, form=form)
+    return render_template('user.html', user=user, books=books.items, next_url=next_url, prev_url=prev_url, form=form)
 
 
 @bp.route('/edit_profile', methods=['GET', 'POST'])
@@ -137,13 +129,13 @@ def search():
     if not g.search_form.validate():
         return redirect(url_for('main.explore'))
     page = request.args.get('page', 1, type=int)
-    posts, total = Post.search(g.search_form.q.data, page,
-                               current_app.config['POSTS_PER_PAGE'])
+    books, total = Book.search(g.search_form.q.data, page,
+                                current_app.config['POSTS_PER_PAGE'])
     next_url = url_for('main.search', q=g.search_form.q.data, page=page + 1) \
         if total > page * current_app.config['POSTS_PER_PAGE'] else None
     prev_url = url_for('main.search', q=g.search_form.q.data, page=page - 1) \
         if page > 1 else None
-    return render_template('search.html', title=_('Search'), posts=posts,
+    return render_template('search.html', title=_('Search'), books=books,
                            next_url=next_url, prev_url=prev_url)
 
 
@@ -193,45 +185,74 @@ def notifications():
         'timestamp': n.timestamp
     } for n in notifications])
 
-@bp.route('/edit_post/<int:id>', methods=['GET', 'POST'])
+
+@bp.route('/new_book/', methods=['GET', 'POST'])
 @login_required
-def edit_post(id):
-    form = PostForm()
-    post = Post.query.filter_by(id=id).first_or_404()
-    if current_user != post.author:
-        abort(404)
+def new_book():
+    form = BookForm()
     if form.validate_on_submit():
-        language = guess_language(form.post.data)
+        language = guess_language(form.description.data)
         if language == 'UNKNOWN' or len(language) > 5:
             language = ''
-        post.body = form.post.data
-        post.language = language
+        book = Book(description=form.description.data, isbn=form.isbn.data, title=form.title.data, author=form.author.data, poster=current_user, language=language)
+        db.session.add(book)
         db.session.commit()
-        flash(_('Your post edited'))
+        f = form.photo.data
+        # filename = secure_filename(f.filename)
+        f.save(os.path.join(current_app.static_folder, 'book_covers', str(book.id))) if f else None
+        flash(_('Your book is now live!'))
+        return redirect(url_for('main.index'))
+    return render_template('new_book.html', title=_('New Book'), form=form)
+
+@bp.route('/edit_book/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_book(id):
+    form = BookForm()
+    book = Book.query.filter_by(id=id).first_or_404()
+    if current_user != book.poster:
+        abort(404)
+    if form.validate_on_submit():
+        language = guess_language(form.title.data)
+        if language == 'UNKNOWN' or len(language) > 5:
+            language = ''
+        book.isbn = form.isbn.data
+        book.title = form.title.data
+        book.author = form.author.data
+        book.description = form.description.data
+        book.language = language
+        if form.photo.data:
+            f = form.photo.data
+            filename = secure_filename(f.filename)
+            f.save(os.path.join(current_app.static_folder, 'book_covers', str(book.id)))
+        db.session.commit()
+        flash(_('Your book edited'))
         return redirect(url_for('main.index'))
     elif request.method == 'GET':
-        form.post.data = post.body
-    return render_template('edit_post.html', title=_('Edit Post'), form=form)
+        form.isbn.data = book.isbn
+        form.title.data = book.title
+        form.author.data = book.author
+        form.description.data = book.description
+    return render_template('edit_book.html', title=_('Edit Book'), form=form)
 
 
-@bp.route('/post/<int:id>', methods=['GET', 'POST'])
-def post(id):
-    post = Post.query.get_or_404(id)
+@bp.route('/book/<int:id>', methods=['GET', 'POST'])
+def book(id):
+    book = Book.query.get_or_404(id)
     form = CommentForm()
     if form.validate_on_submit():
         language = guess_language(form.body.data)
         if language == 'UNKNOWN' or len(language) > 5:
             language = ''
-        comment = Comment(body=form.body.data, post=post, author=current_user._get_current_object(), language=language)
+        comment = Comment(body=form.body.data, book=book, author=current_user._get_current_object(), language=language)
         comment.save()
         flash('Your comment has been published.')
-        return redirect(url_for('main.post', id=post.id, page=1))
+        return redirect(url_for('main.book', id=book.id, page=1))
     page = request.args.get('page', 1, type=int)
-    comments = post.comments.order_by(Comment.time.desc()).paginate(page, current_app.config['POSTS_PER_PAGE'], False)
-    comments_count = post.comments.count()
-    next_url = url_for('main.post', id=post.id, page=comments.next_num) if comments.has_next else None
-    prev_url = url_for('main.post', id=post.id, page=comments.prev_num) if comments.has_prev else None
-    return render_template('post.html', title=_('Post'), comments_count=comments_count, posts=[post], form=form, comments=comments.items, prev_url=prev_url, next_url=next_url)
+    comments = book.comments.order_by(Comment.time.desc()).paginate(page, current_app.config['POSTS_PER_PAGE'], False)
+    comments_count = book.comments.count()
+    next_url = url_for('main.book', id=book.id, page=comments.next_num) if comments.has_next else None
+    prev_url = url_for('main.book', id=book.id, page=comments.prev_num) if comments.has_prev else None
+    return render_template('book.html', title=_('book'), comments_count=comments_count, books=[book], form=form, comments=comments.items, prev_url=prev_url, next_url=next_url)
 
 
 @bp.route('/edit_comment/<int:id>', methods=['GET', 'POST'])
@@ -249,7 +270,7 @@ def edit_comment(id):
         comment.language = language
         db.session.commit()
         flash(_('Your comment edited'))
-        return redirect(url_for('main.post', id=comment.post_id))
+        return redirect(url_for('main.book', id=comment.book_id))
     elif request.method == 'GET':
         form.body.data = comment.body
     return render_template('edit_comment.html', title=_('Edit Comment'), form=form)
@@ -259,7 +280,7 @@ def edit_comment(id):
 def comment(id):
     comment = Comment.query.get_or_404(id)
     parents = comment.get_parents(comment)
-    parent_post = Post.query.filter_by(id=parents[0].post_id)
+    parent_book = Book.query.filter_by(id=parents[0].book_id)
     form = CommentForm()
     if form.validate_on_submit():
         language = guess_language(form.body.data)
@@ -274,4 +295,4 @@ def comment(id):
     comments_count = Comment.query.filter_by(id=comment.id).first().replies.count()
     next_url = url_for('main.comment', id=comment.id, page=comments.next_num) if comments.has_next else None
     prev_url = url_for('main.comment', id=comment.id, page=comments.prev_num) if comments.has_prev else None
-    return render_template('comment.html', title=_('comment'), parent_post=parent_post, parents=parents, comments_count=comments_count, comment=[comment], form=form, comments=comments.items, prev_url=prev_url, next_url=next_url)
+    return render_template('comment.html', title=_('comment'), parent_book=parent_book, parents=parents, comments_count=comments_count, comment=[comment], form=form, comments=comments.items, prev_url=prev_url, next_url=next_url)

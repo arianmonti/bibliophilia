@@ -86,7 +86,7 @@ class User(PaginatedAPIMixin, db.Model, UserMixin):
     password_hash = db.Column(db.String(128))
     about = db.Column(db.String(200))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
+    books = db.relationship('Book', backref='poster', lazy='dynamic')
     followed = db.relationship(
         'User', secondary=followers,
         primaryjoin=(followers.c.follower_id == id),
@@ -122,10 +122,10 @@ class User(PaginatedAPIMixin, db.Model, UserMixin):
     def is_following(self, user):
         return self.followed.filter(followers.c.followed_id == user.id).count() > 0
 
-    def followed_posts(self):
-        followed = Post.query.join(followers, (followers.c.followed_id == Post.user_id)).filter(followers.c.follower_id == self.id)
-        own = Post.query.filter_by(user_id=self.id)
-        return followed.union(own).order_by(Post.time.desc())
+    def followed_books(self):
+        followed = Book.query.join(followers, (followers.c.followed_id == Book.user_id)).filter(followers.c.follower_id == self.id)
+        own = Book.query.filter_by(user_id=self.id)
+        return followed.union(own).order_by(Book.time.desc())
 
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode(
@@ -153,7 +153,7 @@ class User(PaginatedAPIMixin, db.Model, UserMixin):
             'username': self.username,
             'last_seen': self.last_seen.isoformat() + 'Z',
             'about': self.about,
-            'post_count': self.posts.count(),
+            'book_count': self.books.count(),
             'follower_count': self.followers.count(),
             'followed_count': self.followed.count(),
             '_links': {
@@ -210,17 +210,20 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-class Post(SearchableMixin, db.Model):
-    __searchable__ = ['body']
+class Book(SearchableMixin, db.Model):
+    __searchable__ = ['title']
     id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(140))
+    isbn = db.Column(db.String(15), index=True)
+    title = db.Column(db.String(450))
+    description = db.Column(db.String(450))
+    author = db.Column(db.String(128), index=True)
     time = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     language = db.Column(db.String(5))
-    comments = db.relationship('Comment', backref='post', lazy='dynamic')
+    comments = db.relationship('Comment', backref='book', lazy='dynamic')
 
     def __repr__(self):
-        return '<Post %s>' % self.body
+        return '<Book %s>' % self.title
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -248,7 +251,7 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(400))
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     time = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
     language = db.Column(db.String(5))
     parent_id = db.Column(db.Integer, db.ForeignKey('comment.id'))

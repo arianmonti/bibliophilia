@@ -1,5 +1,6 @@
 from flask import request
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileRequired
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Length
 from flask_babel import _, lazy_gettext as _l
@@ -23,8 +24,12 @@ class EditProfileForm(FlaskForm):
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
 
-class PostForm(FlaskForm):
-    post = TextAreaField(_l('Post'), validators=[DataRequired(), Length(min=1, max=400)])
+class BookForm(FlaskForm):
+    title = StringField(_l('title'), validators=[DataRequired()])
+    isbn = StringField(_l('isbn'))
+    author = StringField(_l('author'), validators=[DataRequired()])
+    description = TextAreaField(_l('description'), validators=[Length(min=0, max=400)])
+    photo = FileField(_l('Cover'))
     submit = SubmitField(_l('Submit'))
 
 class SearchForm(FlaskForm):

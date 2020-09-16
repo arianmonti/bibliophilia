@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-09-04 22:35+0430\n"
+"POT-Creation-Date: 2020-09-16 15:10+0430\n"
 "PO-Revision-Date: 2020-08-03 23:03+0430\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fa\n"
@@ -26,7 +26,7 @@ msgstr "لطفا برای دسترسی به این صفحه وارد شوید"
 msgid "Error: the translation service failed."
 msgstr "خطای ترجمه"
 
-#: app/auth/forms.py:9 app/auth/forms.py:15 app/main/forms.py:9
+#: app/auth/forms.py:9 app/auth/forms.py:15 app/main/forms.py:10
 msgid "Username"
 msgstr "نام کاربری"
 
@@ -87,158 +87,186 @@ msgstr "بازیابی رمز عبور"
 msgid "Your password has been reset."
 msgstr "رمز عبور شما تغییر یافت."
 
-#: app/main/forms.py:10
+#: app/main/forms.py:11
 msgid "About me"
 msgstr "درباره من"
 
-#: app/main/forms.py:11 app/main/forms.py:28 app/main/forms.py:42
-#: app/main/forms.py:46
+#: app/main/forms.py:12 app/main/forms.py:33 app/main/forms.py:47
+#: app/main/forms.py:51
 msgid "Submit"
 msgstr "تایید"
 
-#: app/main/forms.py:21
+#: app/main/forms.py:22
 msgid "Please use a different username."
 msgstr "لطفا از نام کاربری دیگری استفاده کنید."
 
-#: app/main/forms.py:27 app/main/routes.py:234
-msgid "Post"
-msgstr "پست"
+#: app/main/forms.py:28
+msgid "title"
+msgstr "عنوان"
 
-#: app/main/forms.py:31 app/main/routes.py:146
+#: app/main/forms.py:29
+msgid "isbn"
+msgstr ""
+
+#: app/main/forms.py:30
+msgid "author"
+msgstr "نویسنده"
+
+#: app/main/forms.py:31
+msgid "description"
+msgstr "توضیحات"
+
+#: app/main/forms.py:32
+msgid "Cover"
+msgstr ""
+
+#: app/main/forms.py:36 app/main/routes.py:138
 msgid "Search"
 msgstr "جستجو"
 
-#: app/main/forms.py:41
+#: app/main/forms.py:46
 msgid "Message"
 msgstr "پیام‌ها"
 
-#: app/main/routes.py:34
-msgid "Your post is now live!"
-msgstr "پست شما اکنون قابل مشاهده است!"
-
-#: app/main/routes.py:40 app/templates/base.html:25
+#: app/main/routes.py:32 app/templates/base.html:27
 msgid "Home"
 msgstr "خانه"
 
-#: app/main/routes.py:51 app/templates/base.html:26
+#: app/main/routes.py:43 app/templates/base.html:28
 msgid "Explore"
 msgstr "جستجو"
 
-#: app/main/routes.py:75
+#: app/main/routes.py:67
 msgid "Your changes have been saved."
 msgstr "تغییرات شما ذخیره شد."
 
-#: app/main/routes.py:80 app/templates/edit_profile.html:5
+#: app/main/routes.py:72 app/templates/edit_profile.html:5
 msgid "Edit Profile"
 msgstr "تغییر پروفایل"
 
-#: app/main/routes.py:90 app/main/routes.py:110
+#: app/main/routes.py:82 app/main/routes.py:102
 #, python-format
 msgid "User %(username)s not found."
 msgstr "کاربر %(username) پیدا نشد."
 
-#: app/main/routes.py:93
+#: app/main/routes.py:85
 msgid "You cannot follow yourself!"
 msgstr ""
 
-#: app/main/routes.py:97
+#: app/main/routes.py:89
 #, python-format
 msgid "You are following %(username)s!"
 msgstr "شما %(username)s را دنبال می کنید!"
 
-#: app/main/routes.py:113
+#: app/main/routes.py:105
 msgid "You cannot unfollow yourself!"
 msgstr ""
 
-#: app/main/routes.py:117
+#: app/main/routes.py:109
 #, python-format
 msgid "You are not following %(username)s."
 msgstr "شما %(username)"
 
-#: app/main/routes.py:168
+#: app/main/routes.py:160
 msgid "Your message has been sent."
 msgstr "پیام شما فرستاده شد."
 
-#: app/main/routes.py:170
+#: app/main/routes.py:162
 msgid "Send Message"
 msgstr "ارسال پیام"
 
-#: app/main/routes.py:210
-msgid "Your post edited"
-msgstr "پست شما ادیت شد"
+#: app/main/routes.py:203
+msgid "Your book is now live!"
+msgstr "این کتاب اکنون قابل مشاهده است"
 
-#: app/main/routes.py:214 app/templates/edit_post.html:5
-msgid "Edit Post"
-msgstr "ادیت پست"
+#: app/main/routes.py:205 app/templates/new_book.html:5
+msgid "New Book"
+msgstr "کتاب جدید"
 
-#: app/main/routes.py:251
+#: app/main/routes.py:228
+msgid "Your book edited"
+msgstr "کتاب ادیت شد"
+
+#: app/main/routes.py:235 app/templates/edit_book.html:5
+msgid "Edit Book"
+msgstr "ادیت کتاب"
+
+#: app/main/routes.py:255
+msgid "book"
+msgstr "کتاب"
+
+#: app/main/routes.py:272
 msgid "Your comment edited"
 msgstr "کامنت شما ادیت شد"
 
-#: app/main/routes.py:255 app/templates/edit_comment.html:5
+#: app/main/routes.py:276 app/templates/edit_comment.html:5
 msgid "Edit Comment"
 msgstr "ادیت کامنت"
 
-#: app/main/routes.py:277
+#: app/main/routes.py:298
 msgid "comment"
 msgstr "کامنت"
+
+#: app/templates/_book.html:22
+#, python-format
+msgid "by %(author)s"
+msgstr "از %(author)s"
+
+#: app/templates/_book.html:23
+#, python-format
+msgid "%(username)s said: %(when)s"
+msgstr "%(username)s گفت: %(when)s"
+
+#: app/templates/_book.html:33 app/templates/_comments.html:34
+msgid "Translate"
+msgstr "ترجمه"
 
 #: app/templates/_comments.html:24
 #, python-format
 msgid "%(username)s replying to %(reply_to)s: %(when)s"
 msgstr "%(username)s در جواب %(reply_to)s: %(when)s"
 
-#: app/templates/_comments.html:34 app/templates/_post.html:26
-msgid "Translate"
-msgstr "ترجمه"
-
-#: app/templates/_post.html:16
-#, python-format
-msgid "%(username)s said: %(when)s"
-msgstr "%(username)s گفت: %(when)s"
-
 #: app/templates/base.html:7
 msgid "Welcome to Bibliophilia"
 msgstr "به بیبلیوفیلیا خوش آمدید"
 
-#: app/templates/base.html:39
+#: app/templates/base.html:41
 msgid "Login"
 msgstr "ورود"
 
-#: app/templates/base.html:43 app/templates/messages.html:4
+#: app/templates/base.html:45 app/templates/messages.html:4
 msgid "Messages"
 msgstr "پیام ها"
 
-#: app/templates/base.html:52
+#: app/templates/base.html:54
 msgid "Profile"
 msgstr "پروفایل"
 
-#: app/templates/base.html:53
+#: app/templates/base.html:55
 msgid "Logout"
 msgstr "خروج"
 
-#: app/templates/base.html:94
+#: app/templates/base.html:97
 msgid "Error: Could not contact server."
 msgstr "خطای ارتباط با سرور"
 
-#: app/templates/comment.html:12 app/templates/post.html:9
+#: app/templates/book.html:9 app/templates/comment.html:12
 msgid "Comments"
 msgstr "نظرات"
 
-#: app/templates/comment.html:27 app/templates/index.html:23
-#: app/templates/post.html:24 app/templates/user.html:49
-msgid "Newer posts"
-msgstr "پست های جدیدتر"
+#: app/templates/book.html:24 app/templates/comment.html:27
+#: app/templates/index.html:26
+msgid "Newer books"
+msgstr "کتاب‌های جدیدتر"
 
-#: app/templates/comment.html:31 app/templates/index.html:27
-#: app/templates/post.html:28 app/templates/user.html:54
-msgid "Older posts"
-msgstr "پست های قدیمی تر"
+#: app/templates/book.html:28 app/templates/comment.html:31
+#: app/templates/index.html:30
+msgid "Older books"
+msgstr "کتاب‌های قدیمی‌تر"
 
 #: app/templates/index.html:5
-#, python-format
-msgid "Hi, %(username)s"
-msgstr "سلام %(username)s"
+msgid "New"
+msgstr "جدید"
 
 #: app/templates/messages.html:12
 msgid "Newer messages"
@@ -299,6 +327,14 @@ msgstr "لغو دنبال کردن"
 msgid "Send private message"
 msgstr "ارسال پیام خصوصی"
 
+#: app/templates/user.html:49
+msgid "Newer posts"
+msgstr "پست های جدیدتر"
+
+#: app/templates/user.html:54
+msgid "Older posts"
+msgstr "پست های قدیمی تر"
+
 #: app/templates/auth/login.html:12
 msgid "New User?"
 msgstr "کاربر جدید؟"
@@ -358,4 +394,22 @@ msgstr "ادمین متوجه شده است. برای مشکل پیش آمده �
 
 #~ msgid "Edit"
 #~ msgstr "ادیت"
+
+#~ msgid "Your post is now live!"
+#~ msgstr "پست شما اکنون قابل مشاهده است!"
+
+#~ msgid "Your post edited"
+#~ msgstr "پست شما ادیت شد"
+
+#~ msgid "Edit Post"
+#~ msgstr "ادیت پست"
+
+#~ msgid "Post"
+#~ msgstr "پست"
+
+#~ msgid "Hi, %(username)s"
+#~ msgstr "سلام %(username)s"
+
+#~ msgid "New Post"
+#~ msgstr ""
 
