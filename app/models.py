@@ -8,6 +8,7 @@ import jwt
 import json
 import base64
 import os
+import statistics
 from app import db, login
 from app.search import add_to_index, remove_from_index, query_index
 
@@ -100,6 +101,7 @@ class User(PaginatedAPIMixin, db.Model, UserMixin):
     token = db.Column(db.String(32), index=True, unique=True)
     token_expiration = db.Column(db.DateTime)
     comments = db.relationship('Comment', backref='author', lazy='dynamic')
+    ratings = db.relationship('Rating', backref='author', lazy='dynamic')
 
     def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
@@ -221,6 +223,11 @@ class Book(SearchableMixin, db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     language = db.Column(db.String(5))
     comments = db.relationship('Comment', backref='book', lazy='dynamic')
+    ratings = db.relationship('Rating', backref='book', lazy='dynamic')
+
+    def return_average(self):
+        average = statistics.mean([int(str(i)) for i in self.ratings.all()]) if self.ratings.all() else 0
+        return average
 
     def __repr__(self):
         return '<Book %s>' % self.title
@@ -284,3 +291,12 @@ class Comment(db.Model):
 
     def __repr__(self):
         return 'Comment %s' %(self.body)
+
+class Rating(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
+    score = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '%d' %(self.score)

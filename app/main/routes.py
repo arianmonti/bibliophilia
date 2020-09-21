@@ -5,7 +5,7 @@ from flask_babel import _, get_locale
 from guess_language import guess_language
 from app import db
 from app.main.forms import EditProfileForm, EmptyForm, BookForm, SearchForm, MessageForm, CommentForm
-from app.models import User, Book, Message, Notification, Comment
+from app.models import User, Book, Rating, Message, Notification, Comment
 from app.translate import translate
 from app.main import bp
 from werkzeug.utils import secure_filename
@@ -238,6 +238,7 @@ def edit_book(id):
 @bp.route('/book/<int:id>', methods=['GET', 'POST'])
 def book(id):
     book = Book.query.get_or_404(id)
+    current_rating = Rating.query.filter_by(author=current_user, book=book).first()
     form = CommentForm()
     if form.validate_on_submit():
         language = guess_language(form.body.data)
@@ -296,3 +297,18 @@ def comment(id):
     next_url = url_for('main.comment', id=comment.id, page=comments.next_num) if comments.has_next else None
     prev_url = url_for('main.comment', id=comment.id, page=comments.prev_num) if comments.has_prev else None
     return render_template('comment.html', title=_('comment'), parent_book=parent_book, parents=parents, comments_count=comments_count, comment=[comment], form=form, comments=comments.items, prev_url=prev_url, next_url=next_url)
+
+
+@bp.route('/echo', methods=['POST'])
+def hello():
+    rate_updating = request.json['rating']
+    book = Book.query.filter_by(id=request.json['book']).first()
+    rating = Rating.query.filter_by(author=current_user, book=book).first()
+    if rating:
+        rating.score = rate_updating
+    else:
+        new_rating = Rating(author=current_user._get_current_object(), book=book, score=rate_updating)
+        db.session.add(new_rating)
+        db.session.commit()
+    db.session.commit()
+    return redirect(url_for('main.book', id=book.id))

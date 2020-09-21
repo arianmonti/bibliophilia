@@ -4,6 +4,9 @@
 
 {% block app_content %}
 {% for book in books %}
+{% block scripts %}
+{{ super() }}
+{% endblock %}
 {% include '_book.html' %}
 {% endfor %}
 <h4>{{ _('Comments') }}</h4>

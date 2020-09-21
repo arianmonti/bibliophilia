@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-09-16 15:10+0430\n"
+"POT-Creation-Date: 2020-09-21 16:56+0330\n"
 "PO-Revision-Date: 2020-08-03 23:03+0430\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fa\n"
@@ -191,33 +191,33 @@ msgstr "کتاب ادیت شد"
 msgid "Edit Book"
 msgstr "ادیت کتاب"
 
-#: app/main/routes.py:255
+#: app/main/routes.py:256
 msgid "book"
 msgstr "کتاب"
 
-#: app/main/routes.py:272
+#: app/main/routes.py:273
 msgid "Your comment edited"
 msgstr "کامنت شما ادیت شد"
 
-#: app/main/routes.py:276 app/templates/edit_comment.html:5
+#: app/main/routes.py:277 app/templates/edit_comment.html:5
 msgid "Edit Comment"
 msgstr "ادیت کامنت"
 
-#: app/main/routes.py:298
+#: app/main/routes.py:299
 msgid "comment"
 msgstr "کامنت"
 
-#: app/templates/_book.html:22
+#: app/templates/_book.html:42
 #, python-format
 msgid "by %(author)s"
 msgstr "از %(author)s"
 
-#: app/templates/_book.html:23
+#: app/templates/_book.html:43
 #, python-format
 msgid "%(username)s said: %(when)s"
 msgstr "%(username)s گفت: %(when)s"
 
-#: app/templates/_book.html:33 app/templates/_comments.html:34
+#: app/templates/_book.html:53 app/templates/_comments.html:34
 msgid "Translate"
 msgstr "ترجمه"
 
@@ -250,16 +250,16 @@ msgstr "خروج"
 msgid "Error: Could not contact server."
 msgstr "خطای ارتباط با سرور"
 
-#: app/templates/book.html:9 app/templates/comment.html:12
+#: app/templates/book.html:12 app/templates/comment.html:12
 msgid "Comments"
 msgstr "نظرات"
 
-#: app/templates/book.html:24 app/templates/comment.html:27
+#: app/templates/book.html:27 app/templates/comment.html:27
 #: app/templates/index.html:26
 msgid "Newer books"
 msgstr "کتاب‌های جدیدتر"
 
-#: app/templates/book.html:28 app/templates/comment.html:31
+#: app/templates/book.html:31 app/templates/comment.html:31
 #: app/templates/index.html:30
 msgid "Older books"
 msgstr "کتاب‌های قدیمی‌تر"

@@ -9,6 +9,25 @@
                 {% else %}
                     <img height="200px" width="150px" src="/static/book-sample.png" />
                 {% endif %}
+                <!--<center><h4 style="margin:10px">{{ book.return_average() }}</h4></center>-->
+    <div style="margin: 10px" class='starrr'></div>
+    {% block scripts %}
+    <script>$('.starrr').starrr({
+        {% if book.ratings.filter_by(author=current_user).first() %}
+            rating: {{ book.ratings.filter_by(author=current_user).first() }},
+        {% endif %}
+        change: function(e, value){
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", '/echo', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                'rating': value,
+                'book': {{ book.id }}
+            }));
+        }
+    })
+    </script>
+    {% endblock %}
             </td>
             <td>
                 {% set user_link %}
@@ -19,10 +38,10 @@
 		</span>
                 {% endset %}
                 <h2 style="width:75%;margin:1px 0px">{{ book.title }}</h2>
-                <h4>{{ _('by %(author)s', author=book.author) }}</h4><br><br>
+                <h4 style="display: inline" >{{ _('by %(author)s', author=book.author) }}</h4>&nbsp;|&nbsp;{{ book.return_average() }}&nbsp;<i style="color: #FFD119" class="fa fa-star"></i><br><br>&nbsp;&nbsp;
                 <!--{{ _('%(username)s said: %(when)s',
                     username=user_link, when=moment(book.time).fromNow()) }}&nbsp; -->
-                    <span id="book{{ book.id }}" dir="rtl"><p dir="auto">{{ book.description }}</p></span><br><br><br>
+                    <span id="book{{ book.id }}" dir="rtl"><p dir="auto">{{ book.description }}</p></span><br><br><br><br><br><br><br>
         {% if book.language and book.description and book.language != g.locale %}
         <br><br>
         <span id="translation{{ book.id }}">
@@ -33,12 +52,12 @@
                     '{{ g.locale }}');">{{ _('Translate') }}</a>
         </span>
         {% endif %}
-        {% if current_user.id == book.user_id %}
             {% if g.locale != 'fa' %}
             <div style="text-align: right;">
             {% else %}
             <div style="text-align: left;">
             {% endif %}
+        {% if current_user.id == book.user_id %}
             <a href="{{ url_for('main.edit_book', id=book.id) }}" ><i class="far fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {% endif %}
             <a href="{{ url_for('main.book', id=book.id) }}" ><i class="far fa-comment"></i>&nbsp;{{ book.comments.count() }}</a></div>
