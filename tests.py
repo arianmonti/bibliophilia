@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta
 import unittest
 from app import create_app, db
-from app.models import User, Post
+from app.models import User, Book 
 from config import Config
 
 
@@ -62,11 +62,11 @@ class UserTest(unittest.TestCase):
         db.session.add_all([u1, u2, u3, u4])
 
         now = datetime.utcnow()
-        p1 = Post(body="post from john", author=u1, time=now + timedelta(seconds=1))
-        p2 = Post(body="post from susan", author=u2, time=now + timedelta(seconds=4))
-        p3 = Post(body="post from mary", author=u3, time=now + timedelta(seconds=3))
-        p4 = Post(body="post from david", author=u4, time=now + timedelta(seconds=2))
-        db.session.add_all([p1, p2, p3, p4])
+        b1 = Book(title="the first book", author="the first author", poster=u1, time=now + timedelta(seconds=1))
+        b2 = Book(title="the second book", author="the first author", poster=u2, time=now + timedelta(seconds=4))
+        b3 = Book(title="the third book", author="the first author", poster=u3, time=now + timedelta(seconds=3))
+        b4 = Book(title="the fourth book", author="the first author", poster=u4, time=now + timedelta(seconds=2))
+        db.session.add_all([b1, b2, b3, b4])
         db.session.commit()
 
         u1.follow(u2)
@@ -75,14 +75,14 @@ class UserTest(unittest.TestCase):
         u3.follow(u4)
         db.session.commit()
 
-        f1 = u1.followed_posts().all()
-        f2 = u2.followed_posts().all()
-        f3 = u3.followed_posts().all()
-        f4 = u4.followed_posts().all()
-        self.assertEqual(f1, [p2, p4, p1])
-        self.assertEqual(f2, [p2, p3])
-        self.assertEqual(f3, [p3, p4])
-        self.assertEqual(f4, [p4])
+        f1 = u1.followed_books().all()
+        f2 = u2.followed_books().all()
+        f3 = u3.followed_books().all()
+        f4 = u4.followed_books().all()
+        self.assertEqual(f1, [b2, b4, b1])
+        self.assertEqual(f2, [b2, b3])
+        self.assertEqual(f3, [b3, b4])
+        self.assertEqual(f4, [b4])
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
