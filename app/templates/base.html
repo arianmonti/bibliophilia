@@ -8,6 +8,11 @@
     {% endif %}
 {% endblock %}
 
+{% block styles %}
+    {{ super() }}
+    <link href='https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css' rel='stylesheet' type='text/css'>
+{% endblock %}
+
 {% block navbar %}
 <body style="background-color: rgba(244, 241, 234,0.5);">
     <!-- background-color: -->
